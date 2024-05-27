@@ -2,11 +2,9 @@
 
 namespace GameZone.Models
 {
-    public class Game
+    public class Game : BaseEntity
     {
-        public int Id { get; set; }
-        [MaxLength(250)]
-        public string Name { get; set; } = string.Empty;
+        
         [MaxLength(2500)]
         public string Description { get; set; } = string.Empty;
         [MaxLength(500)]
