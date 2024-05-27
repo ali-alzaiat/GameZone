@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using GameZone.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace GameZone.Data
 {
@@ -8,5 +9,18 @@ namespace GameZone.Data
         {
             
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<GameDevice>()
+                .HasKey(e => new { e.GameID, e.DeviceID});
+
+            base.OnModelCreating(modelBuilder);
+        }
+
+        public DbSet<Game> Games { get; set; }
+        public DbSet<Device> Devices { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<GameDevice> GameDevices { get; set; }
     }
 }
