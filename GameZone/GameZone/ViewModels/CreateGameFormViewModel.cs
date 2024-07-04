@@ -9,6 +9,7 @@ namespace GameZone.ViewModels
         public string Name { get; set; } = string.Empty;
         [MaxLength(2500)]
         public string Description { get; set; } = string.Empty;
+        [Display(Name = "Category")]
         public int CategoryId { get; set; }
         public IEnumerable<SelectListItem> Categories { get; set; } = Enumerable.Empty<SelectListItem>();
         public List<int> SelectedDevices { get; set; } = new List<int>();
