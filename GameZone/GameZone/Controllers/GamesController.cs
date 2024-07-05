@@ -1,13 +1,15 @@
 ﻿using GameZone.Data;
+using GameZone.Services;
 using GameZone.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace GameZone.Controllers
 {
-    public class GamesController(ApplicationDBContext context) : Controller
+    public class GamesController(ICategoriesService categoriesService, IDevicesService devicesService) : Controller
     {
-        private readonly ApplicationDBContext _context = context;
+        private readonly ICategoriesService _categoriesService = categoriesService;
+        private readonly IDevicesService _devicesService = devicesService;
         public IActionResult Index()
         {
             return View();
@@ -18,14 +20,22 @@ namespace GameZone.Controllers
         {
             CreateGameFormViewModel viewModel = new()
             {
-                Categories = _context.Categories.Select(c => new SelectListItem { Value = c.Id.ToString(), Text = c.Name})
-                .OrderBy(comparer => comparer.Text)
-                .ToList(),
-                Devices = _context.Devices.Select(d => new SelectListItem { Value = d.Id.ToString(), Text = d.Name })
-                .OrderBy(comparer => comparer.Text)
-                .ToList()
+                Categories = _categoriesService.GetSelectList(),
+                Devices = _devicesService.GetSelectList()
             };
             return View(viewModel);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(CreateGameFormViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                model.Categories = _categoriesService.GetSelectList();
+                model.Devices = _devicesService.GetSelectList();
+                return View(model);
+            }
+            return RedirectToAction(nameof(Index));
         }
     }
 }

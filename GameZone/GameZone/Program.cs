@@ -1,4 +1,5 @@
 using GameZone.Data;
+using GameZone.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +10,9 @@ var connectionString = builder.Configuration.GetConnectionString("Connection");
 builder.Services.AddDbContext<ApplicationDBContext>(options => options.UseMySql(connectionString,new MySqlServerVersion(new Version(8,0,2))));
 
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddScoped<ICategoriesService, CategoriesService>();
+builder.Services.AddScoped<IDevicesService, DevicesService>();
 
 var app = builder.Build();
 
