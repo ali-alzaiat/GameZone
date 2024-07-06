@@ -13,6 +13,7 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<ICategoriesService, CategoriesService>();
 builder.Services.AddScoped<IDevicesService, DevicesService>();
+builder.Services.AddScoped<IGamesService, GamesService>();
 
 var app = builder.Build();
 

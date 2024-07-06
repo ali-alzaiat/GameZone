@@ -6,10 +6,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace GameZone.Controllers
 {
-    public class GamesController(ICategoriesService categoriesService, IDevicesService devicesService) : Controller
+    public class GamesController(ICategoriesService categoriesService, IDevicesService devicesService, IGamesService gamesService) : Controller
     {
         private readonly ICategoriesService _categoriesService = categoriesService;
         private readonly IDevicesService _devicesService = devicesService;
+        private readonly IGamesService _gamesService = gamesService;
         public IActionResult Index()
         {
             return View();
@@ -27,7 +28,7 @@ namespace GameZone.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(CreateGameFormViewModel model)
+        public async Task<IActionResult> Create(CreateGameFormViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -35,6 +36,7 @@ namespace GameZone.Controllers
                 model.Devices = _devicesService.GetSelectList();
                 return View(model);
             }
+            await _gamesService.Create(model);
             return RedirectToAction(nameof(Index));
         }
     }
