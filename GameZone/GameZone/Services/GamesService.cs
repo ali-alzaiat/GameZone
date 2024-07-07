@@ -1,5 +1,6 @@
 ﻿using GameZone.Data;
 using GameZone.Models;
+using GameZone.Settings;
 using GameZone.ViewModels;
 
 namespace GameZone.Services
@@ -8,7 +9,7 @@ namespace GameZone.Services
     {
         private readonly ApplicationDBContext _context = context;
         private readonly IWebHostEnvironment _webHostEnvironment = webHostEnvironment;
-        private readonly string _imagePath = $"{webHostEnvironment.WebRootPath}/assets/images/games";
+        private readonly string _imagePath = $"{webHostEnvironment.WebRootPath}{FileSettings.ImagePath}";
         public async Task Create(CreateGameFormViewModel model)
         {
             //Create a path for the image
@@ -17,7 +18,6 @@ namespace GameZone.Services
             //Save the image on the server
             using var stream = File.Create(path);
             await model.Cover.CopyToAsync(stream);
-            stream.Dispose();
             //Save the game in database
             Console.WriteLine(model.CategoryId);
             Game game = new()
