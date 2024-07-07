@@ -17,7 +17,8 @@ namespace GameZone.ViewModels
         [Display(Name = "Supported Devices")]
         public List<int> SelectedDevices { get; set; } = default;
         public IEnumerable<SelectListItem> Devices { get; set; } = Enumerable.Empty<SelectListItem>();
-        [AllowedExtensions(FileSettings.AllowedExtensions)]
+        [AllowedExtensions(FileSettings.AllowedExtensions),
+            MaxFileSize(FileSettings.MaxFileSizeInBytes)]
         public IFormFile Cover { get; set; } = default;
     }
 }
