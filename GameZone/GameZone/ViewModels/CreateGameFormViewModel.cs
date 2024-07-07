@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using GameZone.Attributes;
+using GameZone.Settings;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
 
 namespace GameZone.ViewModels
@@ -15,6 +17,7 @@ namespace GameZone.ViewModels
         [Display(Name = "Supported Devices")]
         public List<int> SelectedDevices { get; set; } = default;
         public IEnumerable<SelectListItem> Devices { get; set; } = Enumerable.Empty<SelectListItem>();
+        [AllowedExtensions(FileSettings.AllowedExtensions)]
         public IFormFile Cover { get; set; } = default;
     }
 }
