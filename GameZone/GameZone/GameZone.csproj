@@ -7,6 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\js\filesize-validator.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\js\filesize-validator.js" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.5">
       <PrivateAssets>all</PrivateAssets>
@@ -17,6 +25,10 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\assets\images\games\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\js\filesize-validator.js" />
   </ItemGroup>
 
 </Project>
