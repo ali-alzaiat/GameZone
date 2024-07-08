@@ -49,12 +49,25 @@
             </div>
             <button type="submit" class="btn btn-light text-black mt-4">Save</button>
         </div>
-        <div class="col-md-6">
-            <img id="cover-preview" alt="Cover" />
+        <div class="col-md-6 d-flex justify-content-center pt-4 overflow-hidden">
+            <img id="cover-preview" alt="Cover" class="d-none" />
         </div>
     </div>
 </form>
 
 @section Scripts{
     <partial name="_ValidationScriptsPartial" />
+    <script>
+        $.validator.addMethod('filesize', (value, element, param) => {
+            let isValid = this.optional(element) || element.files[0].size <= param;
+            return isValid;
+        })
+        let cover = document.querySelector("#Cover");
+        cover.addEventListener("change", () => {
+            let coverPreview = document.querySelector("#cover-preview");
+            console.log(this);
+            coverPreview.setAttribute("src", window.URL.createObjectURL(cover.files[0]));
+            coverPreview.classList.remove("d-none");
+        })
+    </script>
 }
