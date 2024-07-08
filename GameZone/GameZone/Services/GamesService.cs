@@ -2,6 +2,7 @@
 using GameZone.Models;
 using GameZone.Settings;
 using GameZone.ViewModels;
+using Microsoft.EntityFrameworkCore;
 
 namespace GameZone.Services
 {
@@ -30,6 +31,12 @@ namespace GameZone.Services
             };
             _context.Add(game);
             _context.SaveChanges();
+        }
+
+        public IEnumerable<Game> GetAll()
+        {
+            var games = _context.Games.AsNoTracking().ToList();
+            return games;
         }
     }
 }
