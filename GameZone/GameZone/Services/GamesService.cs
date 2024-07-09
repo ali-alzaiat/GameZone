@@ -35,7 +35,12 @@ namespace GameZone.Services
 
         public IEnumerable<Game> GetAll()
         {
-            var games = _context.Games.AsNoTracking().ToList();
+            var games = _context.Games
+                .AsNoTracking()
+                .Include(g => g.Category)
+                .Include(g => g.Devices)
+                .ThenInclude(d => d.Device)
+                .ToList();
             return games;
         }
     }
