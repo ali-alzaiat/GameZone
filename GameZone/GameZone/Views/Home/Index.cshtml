@@ -18,8 +18,8 @@ else
         @foreach (var game in Model)
         {
             <div class="col-lg-4 col-md-6">
-                <div class="card border-dark mb-3" style="max-width: 23rem;">
-                    <div class="card-body" style="background-image: url(@($"{FileSettings.ImagePath}/{game.Cover}")); background-size:cover; background-repeat: no-repeat; height:400px;">
+                <div class="card border-dark mb-3">
+                    <div class="card-body" style="background-image: url(@($"{FileSettings.ImagePath}/{game.Cover}")); background-size:cover; background-repeat: no-repeat; height:480px;">
                         <div class="h-100 d-flex align-items-end">
                             <span class="badge bg-primary rounded-0 fs-5">@game.Category.Name</span>
                         </div>
