@@ -13,14 +13,8 @@ namespace GameZone.Services
         private readonly string _imagePath = $"{webHostEnvironment.WebRootPath}{FileSettings.ImagePath}";
         public async Task Create(CreateGameFormViewModel model)
         {
-            //Create a path for the image
-            var coverName = $"{Guid.NewGuid()}{Path.GetExtension(model.Cover.FileName)}";
-            var path = Path.Combine(_imagePath,coverName);
-            //Save the image on the server
-            using var stream = File.Create(path);
-            await model.Cover.CopyToAsync(stream);
+            string coverName = await SaveCover(model.Cover);
             //Save the game in database
-            Console.WriteLine(model.CategoryId);
             Game game = new()
             {
                 Name = model.Name,
@@ -31,6 +25,46 @@ namespace GameZone.Services
             };
             _context.Add(game);
             _context.SaveChanges();
+        }
+
+        public async Task<Game?> Update(EditGameFormViewModel viewModel)
+        {
+            var game = _context.Games
+                .Include(g => g.Devices)
+                .SingleOrDefault(g => g.Id == viewModel.Id);
+            if (game is null)
+            {
+                return null;
+            }
+            var oldCover = game.Cover;
+
+            game.Name = viewModel.Name;
+            game.Description = viewModel.Description;
+            game.CategoryId = viewModel.CategoryId;
+            game.Devices = viewModel.SelectedDevices.Select(d => new GameDevice { DeviceID=d }).ToList();
+
+            var coverChanged = viewModel.Cover is not null;
+            if(coverChanged)
+            {
+                game.Cover = await SaveCover(viewModel.Cover!);
+            }
+
+            var effectedRows = _context.SaveChanges();
+            if(effectedRows > 0)
+            {
+                if (coverChanged)
+                {
+                    var coverPath = Path.Combine(_imagePath, oldCover);
+                    File.Delete(coverPath);
+                }
+                return game;
+            }
+            else
+            {
+                var cover = Path.Combine(_imagePath, game.Cover);
+                File.Delete(cover);
+                return null;
+            }
         }
 
         public IEnumerable<Game> GetAll()
@@ -51,6 +85,17 @@ namespace GameZone.Services
                 .Include(g => g.Devices)
                 .ThenInclude(d => d.Device)
                 .SingleOrDefault(g => g.Id == id);
+        }
+
+        private async Task<string> SaveCover(IFormFile cover)
+        {
+            //Create a path for the image
+            var coverName = $"{Guid.NewGuid()}{Path.GetExtension(cover.FileName)}";
+            var path = Path.Combine(_imagePath, coverName);
+            //Save the image on the server
+            using var stream = File.Create(path);
+            await cover.CopyToAsync(stream);
+            return coverName;
         }
     }
 }
