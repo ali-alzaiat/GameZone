@@ -7,5 +7,6 @@ namespace GameZone.Services
     {
         Task Create(CreateGameFormViewModel viewModel);
         IEnumerable<Game> GetAll();
+        Game? GetById(int id);
     }
 }

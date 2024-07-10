@@ -1,0 +1,29 @@
+﻿@using GameZone.Settings
+@model Game
+
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<div class="card border-dark bg-dark d-flex">
+    <div class="card-body p-0 overflow-hidden">
+        <div class="row w-100">
+            <div class="col-4 overflow-hidden p-0">
+                <img class="w-100" src="@($"{FileSettings.ImagePath}/{Model.Cover}")" alt="@Model.Name" style="height: 600px;" />
+            </div>
+            <div class="col-8 p-5 d-flex flex-column justify-content-between">
+                <div>
+                    <h1 class="text-muted">@Model.Name</h1>
+                    <span class="badge bg-primary fs-5 mb-4">@Model.Category?.Name</span>
+                    <p>@Model.Description</p>
+                </div>
+                <div class="text-end">
+                    @foreach (var gameDevice in Model.Devices)
+                    {
+                        <i class="@gameDevice.Device.Icon fs-3 me-2 text-muted"></i>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

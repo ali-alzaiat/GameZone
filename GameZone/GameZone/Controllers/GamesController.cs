@@ -40,5 +40,15 @@ namespace GameZone.Controllers
             await _gamesService.Create(model);
             return RedirectToAction(nameof(Index));
         }
+        [HttpGet]
+        public IActionResult Details(int id)
+        {
+            var game = _gamesService.GetById(id);
+            if(game is null)
+            {
+                return NotFound();
+            }
+            return View(game);
+        }
     }
 }

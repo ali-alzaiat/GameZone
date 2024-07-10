@@ -43,5 +43,14 @@ namespace GameZone.Services
                 .ToList();
             return games;
         }
+        public Game? GetById(int id)
+        {
+            return _context.Games
+                .AsNoTracking()
+                .Include(g => g.Category)
+                .Include(g => g.Devices)
+                .ThenInclude(d => d.Device)
+                .SingleOrDefault(g => g.Id == id);
+        }
     }
 }
