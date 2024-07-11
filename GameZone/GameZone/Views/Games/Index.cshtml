@@ -21,7 +21,7 @@ else
     <div class="row mt-5">
         @foreach (var game in Model)
         {
-            <div class="col-12 d-flex">
+            <div class="col-12" id="game">
                 <div class="card border-dark bg-dark mb-3 col-12">
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
@@ -37,7 +37,8 @@ else
                             <div class="align-self-center">
                                 <a class="btn btn-info me-3" asp-action="Edit" asp-route-id="@game.Id">
                                     <i class="bi bi-pencil-fill"></i>
-                                </a><a class="btn btn-danger" id="delete">
+                                </a>
+                                <a href="javascript:;" class="btn btn-danger delete" data-id="@game.Id">
                                     <i class="bi bi-trash3"></i>
                                 </a>
                             </div>

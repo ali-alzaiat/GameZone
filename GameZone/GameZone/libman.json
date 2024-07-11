@@ -20,5 +20,11 @@
   "library": "select2@4.0.13",
   "destination": "wwwroot/select2/"
 }
+,
+{
+  "provider": "cdnjs",
+  "library": "sweetalert2@11.12.2",
+  "destination": "wwwroot/lib/sweetalert2/"
+}
 ]
 }
