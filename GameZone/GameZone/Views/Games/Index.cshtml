@@ -37,7 +37,7 @@ else
                             <div class="align-self-center">
                                 <a class="btn btn-info me-3" asp-action="Edit" asp-route-id="@game.Id">
                                     <i class="bi bi-pencil-fill"></i>
-                                </a><a class="btn btn-danger">
+                                </a><a class="btn btn-danger" id="delete">
                                     <i class="bi bi-trash3"></i>
                                 </a>
                             </div>
@@ -47,4 +47,8 @@ else
             </div>
         }
     </div>
+}
+
+@section Scripts{
+    <script src="~/js/delete.js"></script>
 }

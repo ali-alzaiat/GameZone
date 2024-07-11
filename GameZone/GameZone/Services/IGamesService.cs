@@ -9,5 +9,6 @@ namespace GameZone.Services
         IEnumerable<Game> GetAll();
         Game? GetById(int id);
         Task<Game?> Update(EditGameFormViewModel viewModel);
+        bool Delete(int id);
     }
 }

@@ -97,5 +97,23 @@ namespace GameZone.Services
             await cover.CopyToAsync(stream);
             return coverName;
         }
+
+        public bool Delete(int id)
+        {
+            var game = _context.Games.Find(id);
+            if(game is null)
+            {
+                return false;
+            }
+            _context.Games.Remove(game);
+            var effectedRows = _context.SaveChanges();
+            if(effectedRows > 0)
+            {
+                var path = Path.Combine(_imagePath, game.Cover);
+                File.Delete(path);
+                return true;
+            }
+            return false;
+        }
     }
 }
