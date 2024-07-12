@@ -82,13 +82,13 @@ Click on any game to view its detailed description.
 
 3. Update:
 
-* Navigate to the game details page.
+* Navigate to the games page.
 * Click on "Edit" to update the game information.
 * Submit the form to save changes.
 
 4. Delete:
 
-* Navigate to the game details page.
+* Navigate to the games page.
 * Click on "Delete" to remove the game from the library.
 ## Validation
 
