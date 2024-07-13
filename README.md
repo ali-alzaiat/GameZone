@@ -97,8 +97,22 @@ Click on any game to view its detailed description.
 * Server-side validation ensures data integrity on the server.
 
 ## Screenshots
-Home Page
+### Home Page
+![image](https://github.com/user-attachments/assets/d87ae8de-c732-46f3-9e85-3499ee28e55d)
 
-Game Details Page
+### Game Details Page
+![image](https://github.com/user-attachments/assets/56b00810-4e52-49e3-a22c-ab701f79ae01)
 
-Add New Game Page
+### Games List Page
+![image](https://github.com/user-attachments/assets/ed8db3a3-f7b3-4398-999d-5633bc5842e3)
+
+### Add New Game Page
+![image](https://github.com/user-attachments/assets/93efa6dd-ca25-432b-bf61-16566f4599c1)
+![image](https://github.com/user-attachments/assets/e59236e9-c9c3-4456-9b07-20688d18ed91)
+![image](https://github.com/user-attachments/assets/0c02b955-628e-4d16-830c-7769da8bfcbb)
+
+### Edit Game Page
+![image](https://github.com/user-attachments/assets/73683535-a477-45af-b8c0-9381ee694580)
+
+
+
